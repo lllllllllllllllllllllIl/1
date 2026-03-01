@@ -34,18 +34,19 @@ local OffenseTab = Window:CreateTab("Offense", nil) -- Title, Image
 local OffenseSection = OffenseTab:CreateSection("Shooting") -- Changed 'Tab' to 'MainTab'
 
 -- =========================
--- AUTO RELEASE TOGGLE
+-- AUTO RELEASE TOGGLE + SLIDER
 -- =========================
 
 local Players = game:GetService("Players")
 local RS = game:GetService("ReplicatedStorage")
-
 local LocalPlayer = Players.LocalPlayer
 local Character = workspace[LocalPlayer.Name]
 
 local AutoRelease = false
 local AutoReleaseConnection
+local ReleaseDelay = 0.37 -- default
 
+-- TOGGLE: Turns Auto Green on/off
 OffenseTab:CreateToggle({
     Name = "Auto Green",
     CurrentValue = false,
@@ -68,20 +69,32 @@ OffenseTab:CreateToggle({
             local action = Character:GetAttribute("Action")
 
             if action == "Shooting" then
-                task.wait(0.37)
+                task.wait(ReleaseDelay)
                 RS.Remotes.Server.Action:FireServer({
                     Shoot = false,
                     Type = "Shoot"
                 })
 
             elseif action == "Dunking" then
-                task.wait(0.37)
+                task.wait(ReleaseDelay)
                 RS.Remotes.Server.Action:FireServer({
                     Action = "Jump",
                     Jump = false
                 })
             end
         end)
+    end
+})
+
+-- SLIDER: Controls wait time
+OffenseTab:CreateSlider({
+    Name = "Auto Green Release",
+    Range = {0, 1}, -- you can change max if needed
+    Increment = 0.01,
+    Suffix = " sec",
+    CurrentValue = ReleaseDelay,
+    Callback = function(Value)
+        ReleaseDelay = Value
     end
 })
 
