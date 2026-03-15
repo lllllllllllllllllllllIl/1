@@ -559,8 +559,8 @@ PhysicsTab:CreateToggle({
 
 PhysicsTab:CreateSlider({
     Name = "CFrame Speed Value",
-    Range = {0.5, 5}, -- you can change max if you want
-    Increment = 0.1,
+    Range = {0.01, 5}, -- you can change max if you want
+    Increment = 0.01,
     CurrentValue = 1.5,
     Flag = "CFrameSpeedSlider",
     Callback = function(Value)
