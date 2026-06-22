@@ -13,7 +13,7 @@ local Window = Rayfield:CreateWindow({
         Invite = "GYH92be25Z",
         RememberJoins = true
     },
-    KeySystem = true,
+    KeySystem = false,
     KeySettings = {
         Title = "Vision Script Hub | Key",
         Subtitle = "Link In Discord",
@@ -95,24 +95,6 @@ OffenseTab:CreateSlider({
     CurrentValue = ReleaseDelay,
     Callback = function(Value)
         ReleaseDelay = Value
-    end
-})
-
--- =========================
--- ANTI CONTEST TOGGLE
--- =========================
-
-local AntiContest = false
-
-OffenseTab:CreateToggle({
-    Name = "Anti Contest",
-    CurrentValue = false,
-    Callback = function(Value)
-        AntiContest = Value
-
-        if AntiContest then
-            print("Not added yet")
-        end
     end
 })
 
